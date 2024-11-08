@@ -12,7 +12,8 @@ q_true = np.random.normal(0, 1, (n_bandit, k))  # true value
 
 fig1=plt.figure().add_subplot(111)
 
-methods = ['ucb', 'epsilon-greedy']
+methods = ['epsilon-greedy','ucb']
+epsilon = 0.1
 
 
 for c, m in enumerate(methods):
