@@ -2,7 +2,7 @@
 To reproduce the experiments in Sutton's book
 
 # Algorithms Implemented
-The following algorithms are emplemented, as described in [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/RLbook2020trimmed.pdf) by Richard S. Sutton.
+The following algorithms are implemented, as described in [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/RLbook2020trimmed.pdf) by Richard S. Sutton.
 
 ## Chapter 1 Introduction  
 - Tic-Tac-Toe Game with tabular method
