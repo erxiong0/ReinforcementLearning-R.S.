@@ -12,6 +12,7 @@ The following algorithms are implemented, as described in [Reinforcement Learnin
 - Upper Confidence bound (UCB)
 - Optimistic Initial Value Method
 - Gradient Bandit Algorithm
+[parameter-study-of-various-bandit-methods](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter2-Multi-armed-Bandits/parameter-study-of-various-bandit-methods.png)
 
 # Dependencies  
 - numpy (used version 1.24.3)
