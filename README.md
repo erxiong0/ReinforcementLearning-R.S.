@@ -15,6 +15,11 @@ The following algorithms are implemented, as described in [Reinforcement Learnin
 
 ![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter2-Multi-armed-Bandits/parameter-study-of-various-bandit-methods.png)
 
+## Chapter 4 Dynamic Programming  
+- Solutions to car rental problem
+
+![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/exp-3d.png)
+
 # Dependencies  
 - numpy (used version 1.24.3)
 - matplotlib (used version 3.7.5)
