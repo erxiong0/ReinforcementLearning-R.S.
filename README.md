@@ -26,6 +26,7 @@ The following algorithms are implemented, as described in [Reinforcement Learnin
 - numpy (used version 1.24.3)
 - matplotlib (used version 3.7.5)
 - latex
+- pytorch
 
 # Implementations  
 The codes for each algorithm and corresponding plots generated can be found in the respective folders.  
