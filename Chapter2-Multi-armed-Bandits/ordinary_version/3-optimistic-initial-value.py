@@ -1,6 +1,7 @@
 import numpy as np
 import random
 import matplotlib.pyplot as plt
+import subprocess
 
 n_bandit = 2000         # number of bandit problems
 k = 10                  # number of arms
@@ -55,14 +56,29 @@ for c, eps in enumerate(epsilons):
     fig1.plot(range(n_pulls), optimal_actions, col[c], linewidth = 1)
 
 
-plt.rc('text',usetex=True)
-fig1.title.set_text(r'$\varepsilon$-greedy : $\%$ Optimal Action Vs Steps for 10 arms')
-fig1.set_ylabel(r'$\%$ Optimal Action')
-fig1.set_ylim(0, 100)
-fig1.set_xlabel('Steps')
-fig1.legend((r"$\varepsilon$=0, $Q_1$=5",\
-			 r"$\varepsilon$=0.1, $Q_1$=0",),loc='best')
+def is_latex_installed():
+    try:
+        subprocess.run(['latex', '--version'], check = True, stdout = subprocess.DEVNULL)
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
 
+if is_latex_installed():
+    plt.rc('text',usetex=True)
+    fig1.title.set_text(r'$\varepsilon$-greedy : $\%$ Optimal Action Vs Steps for 10 arms')
+    fig1.set_ylabel(r'$\%$ Optimal Action')
+    fig1.set_ylim(0, 100)
+    fig1.set_xlabel('Steps')
+    fig1.legend((r"$\varepsilon$=0, $Q_1$=5",\
+                r"$\varepsilon$=0.1, $Q_1$=0",),loc='best')
+
+else:
+    fig1.title.set_text('Epsilon-greedy: Optimal Action Vs Steps for 10 arms')
+    fig1.set_ylabel('% Optimal Action')
+    fig1.set_ylim(0, 100)
+    fig1.set_xlabel('Steps')
+    fig1.legend(('epsilon = 0, Q1 = 5', \
+                 'epsilon = 0.1, Q1 = 0',), loc = 'best')
 
 
 plt.show()

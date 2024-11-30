@@ -1,7 +1,7 @@
 import numpy as np
 import random
 import matplotlib.pyplot as plt
-
+import subprocess
 
 n_bandit = 2000         # number of bandit problems
 k = 10                  # number of arms
@@ -68,15 +68,26 @@ for c, m in enumerate(methods):
     # show results
     fig1.plot(range(1,n_pulls+1), avg_reward_pulls, col[c], linewidth = 1)
     
+def is_latex_installed():
+    try:
+        subprocess.run(['latex', '--version'], check = True, stdout = subprocess.DEVNULL)
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
 
+if is_latex_installed():
+    plt.rc('text',usetex=True)
+    fig1.title.set_text(r'$\varepsilon$-greedy : Average Reward Vs Steps for 10 arms')
+    fig1.set_ylabel('Average Reward')
+    fig1.set_xlabel('Steps')
 
-plt.rc('text',usetex=True)
-fig1.title.set_text(r'$\varepsilon$-greedy : Average Reward Vs Steps for 10 arms')
-fig1.set_ylabel('Average Reward')
-fig1.set_xlabel('Steps')
-
-fig1.legend((r"$\varepsilon$-greedy $\varepsilon$=0.1 ",\
-			 r"UCB c = 2",),loc='best')
+    fig1.legend((r"$\varepsilon$-greedy $\varepsilon$=0.1 ",\
+                r"UCB c = 2",),loc='best')
+else:
+    fig1.title.set_text('Epsilon-greedy: Average Reward Vs Steps for 10 arms')
+    fig1.set_ylabel('Average')
+    fig1.set_xlabel('Steps')
+    fig1.legend(('epsilon greedy, epsilon = 0.1',\
+                'UCB, c = 2',), loc = 'best')
 
 plt.show()
 

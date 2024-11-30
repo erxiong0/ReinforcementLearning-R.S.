@@ -1,7 +1,7 @@
 import numpy as np
 import random
 import matplotlib.pyplot as plt
-
+import subprocess
 
 n_bandit = 2000         # number of bandit problems
 k = 10                  # number of arms
@@ -69,18 +69,41 @@ for c, m in enumerate(methods):
     fig2.plot(range(n_pulls), optimal_actions, col[c], linewidth = 1)
 
 
-plt.rc('text',usetex=True)
-fig1.title.set_text(r'$\epsilon$-greedy : Average Reward Vs Steps for 10 arms')
-fig1.set_ylabel('Average Reward')
-fig1.set_xlabel('Steps')
-fig1.legend((r"$\epsilon=0.1$ "+'sample average',\
-			 r"$\epsilon=0.1, \alpha = 0.1$",),loc='best')
-fig2.title.set_text(r'$\epsilon$-greedy : $\%$ Optimal Action Vs Steps for 10 arms')
-fig2.set_ylabel(r'$\%$ Optimal Action')
-fig2.set_xlabel('Steps')
-fig2.set_ylim(0,100)
-fig2.legend((r"$\epsilon=0.1$"+'sample average',\
-			 r"$\epsilon=0.1, \alpha = 0.1$",),loc='best')
+# check latex package
+def is_latex_installed():
+    try:
+        subprocess.run(['latex', '--version'], check = True, stdout = subprocess.DEVNULL)
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
+
+if is_latex_installed():
+    plt.rc('text', usetex = True)
+
+    fig1.title.set_text(r'$\varepsilon$-greedy : Average Reward Vs Steps for 10 arms')
+    fig1.set_ylabel('Average Reward')
+    fig1.set_xlabel('Steps')
+    fig1.legend((r"$\varepsilon=0.1$ "+'sample average',\
+                r"$\varepsilon=0.1, \alpha = 0.1$",),loc='best')
+    fig2.title.set_text(r'$\varepsilon$-greedy : $\%$ Optimal Action Vs Steps for 10 arms')
+    fig2.set_ylabel(r'$\%$ Optimal Action')
+    fig2.set_xlabel('Steps')
+    fig2.set_ylim(0,100)
+    fig2.legend((r"$\varepsilon=0.1$"+'sample average',\
+                r"$\varepsilon=0.1, \alpha = 0.1$",),loc='best')
+
+else:
+    fig1.title.set_text('Epsilon-greedy : Average Reward Vs Steps for 10 arms')
+    fig1.set_ylabel('Average Reward')
+    fig1.set_xlabel('Steps')
+    fig1.legend(("epsilon = 0.1 "+'sample average',\
+                "epsilon = 0.1, alpha = 0.1",), loc='best')
+    fig2.title.set_text('epsilon-greedy : \% Optimal Action Vs Steps for 10 arms')
+    fig2.set_ylabel('% Optimal Action')
+    fig2.set_xlabel('Steps')
+    fig2.set_ylim(0,100)
+    fig2.legend(("epsilon = 0.1"+'sample average',\
+                "epsilon = 0.1, alpha = 0.1",),loc='best')
 
 
 plt.show()

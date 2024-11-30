@@ -2,7 +2,7 @@ import numpy as np
 from typing import List
 import random
 import matplotlib.pyplot as plt
-
+import subprocess
 
 n_bandit = 2000     # number of bandit problems
 k = 10              # number of arms
@@ -66,25 +66,56 @@ for c, eps in enumerate(epsilons):
     # show results
     fig1.plot(range(n_pulls), avg_reward_pulls, col[c], linewidth = 1)
     fig2.plot(range(n_pulls), optimal_actions, col[c], linewidth = 1)
-  
 
-plt.rc('text',usetex=True)
-fig1.title.set_text(r'$\epsilon$-greedy : Average Reward Vs Steps for 10 arms')
-fig1.set_ylabel('Average Reward')
-fig1.set_xlabel('Steps')
-fig1.legend((r"$\epsilon=$"+str(epsilons[0]),\
-			 r"$\epsilon=$"+str(epsilons[1]),\
-				r"$\epsilon=$"+str(epsilons[2]),\
-					r"$\epsilon=$"+str(epsilons[3]),\
-						r"$\epsilon=$"+str(epsilons[4])),loc='best')
-fig2.title.set_text(r'$\epsilon$-greedy : $\%$ Optimal Action Vs Steps for 10 arms')
-fig2.set_ylabel(r'$\%$ Optimal Action')
-fig2.set_xlabel('Steps')
-fig2.set_ylim(0,100)
-fig2.legend((r"$\epsilon=$"+str(epsilons[0]),\
-			 r"$\epsilon=$"+str(epsilons[1]),\
-				r"$\epsilon=$"+str(epsilons[2]),\
-					r"$\epsilon=$"+str(epsilons[3]),\
-						r"$\epsilon=$"+str(epsilons[4])),loc='best')
+
+# check latex package
+def is_latex_installed():
+    try:
+        subprocess.run(['latex', '--version'], check = True, stdout = subprocess.DEVNULL)
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
+
+if is_latex_installed():
+    plt.rc('text', usetex = True)
+
+    fig1.title.set_text(r'$\varepsilon$-greedy : Average Reward Vs Steps for 10 arms')
+    fig1.set_ylabel('Average Reward')
+    fig1.set_xlabel('Steps')
+    fig1.legend((r"$\epsilon=$"+str(epsilons[0]),\
+                r"$\epsilon=$"+str(epsilons[1]),\
+                    r"$\epsilon=$"+str(epsilons[2]),\
+                        r"$\epsilon=$"+str(epsilons[3]),\
+                            r"$\epsilon=$"+str(epsilons[4])),loc='best')
+    fig2.title.set_text(r'$\epsilon$-greedy : $\%$ Optimal Action Vs Steps for 10 arms')
+    fig2.set_ylabel(r'$\%$ Optimal Action')
+    fig2.set_xlabel('Steps')
+    fig2.set_ylim(0,100)
+    fig2.legend((r"$\epsilon=$"+str(epsilons[0]),\
+                r"$\epsilon=$"+str(epsilons[1]),\
+                    r"$\epsilon=$"+str(epsilons[2]),\
+                        r"$\epsilon=$"+str(epsilons[3]),\
+                            r"$\epsilon=$"+str(epsilons[4])),loc='best')
+
+
+else:
+    fig1.title.set_text('Epsilon-greedy: Average Reward Vs Steps for 10 arms')
+    fig1.set_ylabel('Average Reward')
+    fig1.set_xlabel('Steps')
+    fig1.legend(('epsilon = ' + str(epsilons[0]), \
+                'epsilon = ' + str(epsilons[1]), \
+                'epsilon = ' + str(epsilons[2]), \
+                'epsilon = ' + str(epsilons[3]), \
+                'epsilon = ' + str(epsilons[4])), loc = 'best')
+    
+    fig2.title.set_text(r'Epsilon-greedy: % Optimal Action Vs Steps for 10 arms')
+    fig2.set_ylabel('% Optimal Action')
+    fig2.set_xlabel('Steps')
+    fig2.set_ylim(0, 100)
+    fig2.legend(('epsilon = ' + str(epsilons[0]), \
+                'epsilon = ' + str(epsilons[1]), \
+                'epsilon = ' + str(epsilons[2]), \
+                'epsilon = ' + str(epsilons[3]), \
+                'epsilon = ' + str(epsilons[4])), loc = 'best')
 
 plt.show()

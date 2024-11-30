@@ -1,7 +1,7 @@
 import numpy as np
 import random
 import matplotlib.pyplot as plt
-
+import subprocess
 
 n_bandit = 2000         # number of bandit problems
 k = 10                  # number of arms
@@ -61,20 +61,40 @@ for c, alpha in enumerate(methods):
     fig1.plot(range(n_pulls), optimal_actions, col[c], linewidth = 1)
 
 
-plt.rc('text',usetex=True)
-fig1.title.set_text(r'Gradient bandit algorithm : $\%$ Optimal Action Vs Steps for 10 arms')
-fig1.set_ylabel(r'$\%$ Optimal Action')
-fig1.set_ylim(0, 100)
-fig1.set_xlabel('Steps')
-fig1.legend((r"$\alpha$=0.1, with baseline",\
-			r"$\alpha$=0.4, with baseline",\
-            r"$\alpha$ = 0.1, without baseline",\
-            r"$\alpha$ = 0.4, without baseline",),loc='best')
+def is_latex_installed():
+    try:
+        subprocess.run(['latex', '--version'], check = True, stdout = subprocess.DEVNULL)
+        return True
+    except:
+        return False
+
+
+if is_latex_installed:
+    plt.rc('text',usetex=True)
+    fig1.title.set_text(r'Gradient bandit algorithm : $\%$ Optimal Action Vs Steps for 10 arms')
+    fig1.set_ylabel(r'$\%$ Optimal Action')
+    fig1.set_ylim(0, 100)
+    fig1.set_xlabel('Steps')
+    fig1.legend((r"$\alpha$=0.1, with baseline",\
+                r"$\alpha$=0.4, with baseline",\
+                r"$\alpha$ = 0.1, without baseline",\
+                r"$\alpha$ = 0.4, without baseline",),loc='best')
+
+    
+
+else:
+    fig1.title.set_text('Gradient bandit algorithm : % Optimal Action Vs Steps for 10 arms')
+    fig1.set_ylabel('% Optimal Action')
+    fig1.set_ylim(0, 100)
+    fig1.set_xlabel('Steps')
+    fig1.legend(("alpha = 0.1, with baseline",\
+                "alpha = 0.4, with baseline",\
+                "alpha = 0.1, without baseline",\
+                "alpha = 0.4, without baseline",),loc='best')
 
 fig1.spines['right'].set_visible(False)
 fig1.spines['top'].set_visible(False)
 fig1.tick_params(direction='in', which='both', axis='both')
-
 plt.show()
 
 
