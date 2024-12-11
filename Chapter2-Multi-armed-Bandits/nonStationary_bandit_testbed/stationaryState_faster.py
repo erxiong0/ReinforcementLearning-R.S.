@@ -305,7 +305,7 @@ def visualized():
 
     ax.tick_params(direction = 'in', which = 'both', axis = 'both')
     
-    plt.savefig(f'{current_dir}/figure.png', dpi=300, bbox_inches='tight')
+    #plt.savefig(f'{current_dir}/figure.png', dpi=300, bbox_inches='tight')
     plt.show()
 
 
