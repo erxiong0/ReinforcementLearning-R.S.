@@ -1,0 +1,5 @@
+info
+epsilon_greedy cost: 497.29594373703003
+greedy_optimistic_initial cost: 302.6775314807892
+ucb cost: 1897.4532248973846
+gradient_bandit cost: 2306.076200246811
