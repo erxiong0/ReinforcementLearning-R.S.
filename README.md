@@ -23,7 +23,6 @@ The following algorithms are implemented, as described in [Reinforcement Learnin
 - Solutions to exercise 4.7
 - Value iteration on gambler's problem
 
-![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/CarRentalProblem/exp-3d.png)
 ![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/GamblersProblem/gamblerGame_value.png)
 
 # Dependencies  
