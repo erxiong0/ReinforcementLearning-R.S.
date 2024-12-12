@@ -21,8 +21,11 @@ The following algorithms are implemented, as described in [Reinforcement Learnin
 ## Chapter 4 Dynamic Programming  
 - Solutions to car rental problem
 - Solutions to exercise 4.7
+- Value iteration on gambler's problem
 
 ![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/CarRentalProblem/exp-3d.png)
+![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/GamblersProblem/gamblerGame_value.png)
+![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/GamblersProblem/gamblerGame_policy.png)
 
 # Dependencies  
 - numpy (used version 1.24.3)
