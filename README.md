@@ -21,7 +21,7 @@ The following algorithms are implemented, as described in [Reinforcement Learnin
 ## Chapter 4 Dynamic Programming  
 - Solutions to car rental problem
 - Solutions to exercise 4.7
-- Value iteration on gambler's problem
+- Value iteration on gambler's problem & analysis of different chances of winning
 
 ![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/GamblersProblem/gamblerGame_value.png)
 
