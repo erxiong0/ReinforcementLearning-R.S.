@@ -24,6 +24,7 @@ The following algorithms are implemented, as described in [Reinforcement Learnin
 - Value iteration on gambler's problem & analysis of different chances of winning
 
 ![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/GamblersProblem/gamblerGame_value.png)
+![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/GamblersProblem/gamblerGame_prob.png)
 
 # Dependencies  
 - numpy (used version 1.24.3)
