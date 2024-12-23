@@ -252,7 +252,7 @@ def visualized():
         4.0: 9
     }
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize = (5,3))
 
     col = ['r-', 'k-', 'g-', 'b-']
     curve_list = ['epsilon', 'greedy', 'gradient', 'ucb']
@@ -279,33 +279,33 @@ def visualized():
     
     if is_latex_installed():
         plt.rc('text', usetex = True)
-        ax.text(2/128, 1.3, r'$\varepsilon$-greedy', fontsize=17, color='red')
-        ax.text(5, 1.25, r'gradient', fontsize=17, color='green')
-        ax.text(5.3, 1.21, r'bandit', fontsize=17, color='green')
-        ax.text(4.2, 1.46, r'UCB', fontsize=17, color='blue')
-        ax.text(9.1, 1.45, r'greedy with', fontsize=17, color='black')
-        ax.text(9.3, 1.41, r'optimistic', fontsize=17, color='black')
-        ax.text(9.1, 1.37, r'initialization ', fontsize=17, color='black')
-        ax.text(9.4, 1.33, r'$\alpha=0.1$', fontsize = 17, color = 'black')
+        ax.text(2/128, 1.3, r'$\varepsilon$-greedy', fontsize=12, color='red')
+        ax.text(5, 1.25, r'gradient', fontsize=12, color='green')
+        ax.text(5.3, 1.21, r'bandit', fontsize=12, color='green')
+        ax.text(4.2, 1.46, r'UCB', fontsize=12, color='blue')
+        ax.text(9.1, 1.45, r'greedy with', fontsize=12, color='black')
+        ax.text(9.3, 1.41, r'optimistic', fontsize=12, color='black')
+        ax.text(9.1, 1.37, r'initialization ', fontsize=12, color='black')
+        ax.text(9.4, 1.33, r'$\alpha=0.1$', fontsize = 12, color = 'black')
 
-        ax.text(0.3, -0.1, r'$\varepsilon$', fontsize=18, color='red', ha='center', transform=ax.transAxes)
-        ax.text(0.5, -0.1, r'$\alpha$', fontsize=18, color='green', ha='center', transform=ax.transAxes)
-        ax.text(0.7, -0.1, r'$c$', fontsize=18, color='blue', ha='center', transform=ax.transAxes)
-        ax.text(0.9, -0.1, r'$Q_0$', fontsize=18, color='black', ha='center', transform=ax.transAxes)
+        ax.text(0.3, -0.1, r'$\varepsilon$', fontsize=16, color='red', ha='center', transform=ax.transAxes)
+        ax.text(0.5, -0.1, r'$\alpha$', fontsize=16, color='green', ha='center', transform=ax.transAxes)
+        ax.text(0.7, -0.1, r'$c$', fontsize=16, color='blue', ha='center', transform=ax.transAxes)
+        ax.text(0.9, -0.1, r'$Q_0$', fontsize=16, color='black', ha='center', transform=ax.transAxes)
     
    
 
     ax.set_ylim(0.9, 1.5)
     ax.set_xticks(x_ticks)
     ax.set_xticklabels(x_labels)
-    ax.set_ylabel('Average reward over last 100000 steps', fontsize = 14)
+    ax.set_ylabel('Average reward over last 100000 steps', fontsize = 12)
 
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
 
     ax.tick_params(direction = 'in', which = 'both', axis = 'both')
     
-    #plt.savefig(f'{current_dir}/figure.png', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{current_dir}/figure.png', dpi=300, bbox_inches='tight')
     plt.show()
 
 
