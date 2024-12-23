@@ -26,6 +26,11 @@ The following algorithms are implemented, as described in [Reinforcement Learnin
 ![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/GamblersProblem/gamblerGame_value.png)
 ![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter4-DynamicProgramming/GamblersProblem/gamblerGame_prob.png)
 
+## Chapter 5 Monte Carlo Methods
+- Solutions to Blackjack Game
+
+![](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter5-MonteCarloMethods/monte_carlo_on_policy.png)
+
 # Dependencies  
 - numpy (used version 1.24.3)
 - matplotlib (used version 3.7.5)
