@@ -16,7 +16,6 @@ The following algorithms are implemented, as described in [Reinforcement Learnin
 - Nonstationary version of multi-armed bandit tasks (pytorch)
 
 ![Stationary](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter2-Multi-armed-Bandits/ordinary_version/parameter-study-of-various-bandit-methods.png)
-![Nonstationary](https://github.com/erxiong0/ReinforcementLearning-R.S./blob/main/Chapter2-Multi-armed-Bandits/nonStationary_bandit_testbed/figure.png)
 
 ## Chapter 4 Dynamic Programming  
 - Solutions to car rental problem
