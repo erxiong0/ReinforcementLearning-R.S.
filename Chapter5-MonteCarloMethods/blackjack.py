@@ -16,23 +16,23 @@ from typing import Callable, List, Tuple
 import os
 
 
-# actions: hit or strike
-HIT, STRIKE = 0, 1
-ACTIONS = [HIT, STRIKE]
+# actions: hit or stick
+HIT, STICK = 0, 1
+ACTIONS = [HIT, STICK]
 
 # policy for player
 POLICY_PLAYER = np.zeros(22, dtype = int)
 for i in range(12, 20):
     POLICY_PLAYER[i] = HIT
-POLICY_PLAYER[20] = STRIKE
-POLICY_PLAYER[21] = STRIKE
+POLICY_PLAYER[20] = STICK
+POLICY_PLAYER[21] = STICK
 
 # policy for dealer
 POLICY_DEALER = np.zeros(22)
 for i in range(12, 17):
     POLICY_DEALER[i] = HIT
 for i in range(17, 22):
-    POLICY_DEALER[i] = STRIKE
+    POLICY_DEALER[i] = STICK
 
 
 # function form of target policy of player
@@ -42,7 +42,7 @@ def target_policy_player(usable_ace_player, player_sum, dealer_card):
 # function form of behavior policy of player
 def behavior_policy_player(usable_ace_player, player_sum, dealer_card):
     if np.random.binomial(1, 0.5) == 1:
-        return STRIKE
+        return STICK
     return HIT
 
 
@@ -108,7 +108,7 @@ def judger(policy_player: Callable, initial_state: List = None, initial_action: 
         
         player_trajectory.append([(usable_ace_player, player_sum, dealer_card1), action])
         
-        if action == STRIKE:
+        if action == STICK:
             break
 
         card = get_card()
@@ -132,7 +132,7 @@ def judger(policy_player: Callable, initial_state: List = None, initial_action: 
     # dealer's turn
     while True:
         action = POLICY_DEALER[dealer_sum]
-        if action == STRIKE:
+        if action == STICK:
             break
 
         new_card = get_card()
