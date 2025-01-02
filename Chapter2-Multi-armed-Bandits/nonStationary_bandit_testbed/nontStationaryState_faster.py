@@ -7,7 +7,9 @@ import subprocess
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
 
-def epsilon_greedy():
+def epsilon_greedy(weighted: bool = False):
+    weighted_alpha = 0.1
+
     t1 = time.time()
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -44,9 +46,14 @@ def epsilon_greedy():
             chosen_idx = chosen_actions.squeeze().to(device)
             temp_R[bandit_idx, chosen_idx] = torch.randn(n_bandit, device = q_true.device) * 1 + \
             q_true[bandit_idx, chosen_idx]
-            N[bandit_idx, chosen_idx] += 1
-            Q[bandit_idx, chosen_idx] += \
-            (temp_R[bandit_idx, chosen_idx] - Q[bandit_idx, chosen_idx]) / N[bandit_idx, chosen_idx]
+            
+            if weighted:
+                Q[bandit_idx, chosen_idx] += \
+                (temp_R[bandit_idx, chosen_idx] - Q[bandit_idx, chosen_idx]) * weighted_alpha
+            else:
+                N[bandit_idx, chosen_idx] += 1
+                Q[bandit_idx, chosen_idx] += \
+                (temp_R[bandit_idx, chosen_idx] - Q[bandit_idx, chosen_idx]) / N[bandit_idx, chosen_idx]
 
             if n_pulls >= 100000:
                 avg_eps_res += (torch.mean(temp_R[bandit_idx, chosen_idx]).item() - avg_eps_res) / pull
@@ -55,14 +62,15 @@ def epsilon_greedy():
     
     eps_res_total = torch.tensor(eps_res_total)
     epsilon_values = torch.tensor(epsilon_values)
-
     torch.save(eps_res_total, f'{current_dir}/torch_results/epsilon-weighted.pth')
     torch.save(epsilon_values, f'{current_dir}/torch_results/epsilon-x.pth')
     t2 = time.time()
     return f'epsilon_greedy cost: {t2 - t1}'
 
 
-def ucb():
+def ucb(weighted: bool = False):
+    weighted_alpha = 0.1
+
     t1 = time.time()
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -101,9 +109,13 @@ def ucb():
 
             temp_R[bandit_idx, chosen_idx] = torch.randn(n_bandit, device = q_true.device) * 1 + \
             q_true[bandit_idx, chosen_idx]
-            N[bandit_idx, chosen_idx] += 1
-            Q[bandit_idx, chosen_idx] += \
-            (temp_R[bandit_idx, chosen_idx] - Q[bandit_idx, chosen_idx]) / N[bandit_idx, chosen_idx]
+            
+            if weighted:
+                Q[bandit_idx, chosen_idx] += (temp_R[bandit_idx, chosen_idx] - Q[bandit_idx, chosen_idx]) * weighted_alpha
+            else:
+                N[bandit_idx, chosen_idx] += 1
+                Q[bandit_idx, chosen_idx] += \
+                (temp_R[bandit_idx, chosen_idx] - Q[bandit_idx, chosen_idx]) / N[bandit_idx, chosen_idx]
 
             if n_pull >= 100000:
                 avg_ucb_res += (torch.mean(temp_R[bandit_idx, chosen_idx]).item() - avg_ucb_res) / n_pull
@@ -118,7 +130,9 @@ def ucb():
     t2 = time.time()
     return f'ucb cost: {t2 - t1}'
 
-def gradient_bandit():
+def gradient_bandit(weighted: bool = False):
+    weighted_alpha = 0.1
+
     t1 = time.time()
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -166,7 +180,10 @@ def gradient_bandit():
                 diff_expanded = diff.unsqueeze(1).expand(-1, k)
                 H[mask] -=  alpha * diff_expanded[mask] * prob[mask]
             
-            Q += (temp_R[bandit_idx, chosen_idx] - Q) / n_pull
+            if weighted:
+                Q += (temp_R[bandit_idx, chosen_idx] - Q) * weighted_alpha
+            else:
+                Q += (temp_R[bandit_idx, chosen_idx] - Q) / n_pull
             
             if n_pull > 100000:
                 avg_alpha_res += (torch.mean(temp_R[bandit_idx, chosen_idx]).item() - avg_alpha_res) / n_pull
@@ -216,6 +233,7 @@ def greedy_optimistic_initial():
             
             temp_R[bandit_idx, chosen_idx] = torch.randn(n_bandit, device = device) * 1 + \
             q_true[bandit_idx, chosen_idx]
+
             Q[bandit_idx, chosen_idx] += (temp_R[bandit_idx, chosen_idx] - Q[bandit_idx, chosen_idx]) * alpha
 
             if pull > 100000:
